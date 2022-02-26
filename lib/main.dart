@@ -1,18 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:vt_hacks_submission/page/loading_animation_page.dart';
 
-import 'package:vt_hacks_submission/chatbot.dart';
-
-late ChatBot bot;
-
 void main() {
-  //runApp(const MyApp());
-  bot = ChatBot(chat);
-}
-
-void chat() async {
-  print(bot.query("Search for demon slayer"));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -51,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
         future: _loadingData(),
         builder: (BuildContext ctx, AsyncSnapshot snap) {
           if (snap.data == null) {
-            return const LoadingAnimationsPage();
+            return LoadingAnimationsPage();
           } else {
             return Scaffold(
               body: Center(
