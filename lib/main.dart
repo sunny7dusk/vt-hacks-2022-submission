@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:vt_hacks_submission/components/chatbox_comp.dart';
 import 'package:vt_hacks_submission/page/loading_animation_page.dart';
 
 void main() {
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[],
+                  children: <Widget>[ChatboxComp()],
                 ),
               ),
             );
