@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   _loadingData() {
-    return Future<String>.delayed(const Duration(seconds: 5), () => 'Weee');
+    return Future<String>.delayed(const Duration(seconds: 2), () => 'Weee');
   }
 
   @override
@@ -45,10 +45,55 @@ class _MyHomePageState extends State<MyHomePage> {
             return const LoadingAnimationsPage();
           } else {
             return Scaffold(
+              backgroundColor: const Color(0xFF7A9BEE),
+              appBar: AppBar(
+                title: const Text('info.friend'),
+                centerTitle: true,
+                backgroundColor: Colors.transparent,
+                elevation: 0.0,
+              ),
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[],
+                  children: <Widget>[
+                    Stack(
+                      children: [
+                        Container(
+                          height: MediaQuery.of(ctx).size.height - 70.0,
+                          width: MediaQuery.of(ctx).size.width,
+                          color: Colors.transparent,
+                        ),
+                        Positioned(
+                          top: 20.0,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(45.0),
+                                topRight: Radius.circular(45.0),
+                              ),
+                              color: Colors.white,
+                            ),
+                          ),
+                          height: MediaQuery.of(ctx).size.height,
+                          width: MediaQuery.of(ctx).size.width,
+                        ),
+                        Column(
+                          children: [
+                            Scrollbar(
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    for (var i = 0; i < 100; i++)
+                                      Expanded(child: Text(i.toString()))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             );
