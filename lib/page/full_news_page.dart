@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:vt_hacks_submission/page/news_article.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FullNewsPage extends StatelessWidget {
-  const FullNewsPage({Key? key}) : super(key: key);
+  FullNewsPage({Key? key, required this.newsArticles}) : super(key: key);
+
+  List<NewsArticle> newsArticles;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF7A9BEE),
       appBar: AppBar(
-        title: const Text('info.friend'),
+        title: const Text('Results'),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -27,6 +31,7 @@ class FullNewsPage extends StatelessWidget {
                   color: Colors.white,
                 ),
                 child: Container(
+                  margin: EdgeInsets.only(top: 25.0),
                   height: MediaQuery.of(context).size.height - 60,
                   width: MediaQuery.of(context).size.width,
                   child: Scrollbar(
@@ -34,7 +39,52 @@ class FullNewsPage extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       child: Column(
                         children: [
-                          for (var i = 0; i < 100; i++) Text(i.toString())
+                          for (var i in newsArticles)
+                            Card(
+                              margin: const EdgeInsets.all(10.0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    ListTile(
+                                      leading: Text(i.title),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Flexible(
+                                          flex: 1,
+                                          fit: FlexFit.tight,
+                                          child: Text(i.newsSource),
+                                        ),
+                                        Flexible(
+                                          flex: 1,
+                                          fit: FlexFit.tight,
+                                          child: i.getBiasRating(),
+                                        ),
+                                        Flexible(
+                                          flex: 2,
+                                          fit: FlexFit.tight,
+                                          child: i.getCredibilityRating(),
+                                        ),
+                                        Flexible(
+                                          flex: 2,
+                                          fit: FlexFit.tight,
+                                          child: Text(i.factualReporting),
+                                        ),
+                                        TextButton(
+                                          onPressed: () async {
+                                            await launch(i.articleUrl);
+                                          },
+                                          child: const Text("ARTICLE"),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                     ),
