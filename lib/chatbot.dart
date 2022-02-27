@@ -14,7 +14,7 @@ class ChatBot {
     });
   }
 
-  Future<ChatBot> load() async {
+  static Future<ChatBot> load() async {
     return ChatBot._();
   }
 

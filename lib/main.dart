@@ -2,13 +2,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
+import 'package:vt_hacks_submission/chatbot.dart';
 import 'package:vt_hacks_submission/components/chatbox_comp.dart';
 import 'package:vt_hacks_submission/page/full_news_page.dart';
 import 'package:vt_hacks_submission/page/sarang.dart';
 import 'package:vt_hacks_submission/page/loading_animation_page.dart';
 import 'package:vt_hacks_submission/page/news_article.dart';
 
-void main() {
+late final ChatBot globalBot;
+
+void main() async {
+  globalBot = await ChatBot.load();
   runApp(const MyApp());
 }
 
@@ -65,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (snap.data == null) {
           return const LoadingAnimationsPage();
         } else {
-          return const ChatPage();
+          return ChatPage(chatBot: globalBot);
         }
       },
     );

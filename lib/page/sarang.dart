@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:vt_hacks_submission/chatbot.dart';
 import 'package:vt_hacks_submission/components/chatbox_comp.dart';
 import 'package:lottie/lottie.dart';
+import 'package:vt_hacks_submission/page/news_article.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  final ChatBot chatBot;
+
+  ChatPage({Key? key, required this.chatBot}) : super(key: key);
 
   @override
   State<ChatPage> createState() => _FullNewsPageState();
@@ -11,6 +15,8 @@ class ChatPage extends StatefulWidget {
 
 class _FullNewsPageState extends State<ChatPage> {
   String _message = "";
+  int index = 0;
+  List<ChatBox> items = [];
 
   _EntryBox() {
     return Container(
@@ -29,6 +35,17 @@ class _FullNewsPageState extends State<ChatPage> {
             IconButton(
                 onPressed: () {
                   // do api call to bot
+                  bool botOrHuman = index % 2 == 0;
+                  ChatBox curr = ChatBox(
+                      isHuman: botOrHuman, isBot: !botOrHuman, text: _message);
+                  // if (!botOrHuman) {
+                  //   widget.chatBot.query(_message).then((value) => null);
+                  // } else {
+
+                  // }
+                  setState(() {
+                    items.add(curr);
+                  });
                 },
                 iconSize: 25.0,
                 icon: Icon(Icons
@@ -40,8 +57,6 @@ class _FullNewsPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<ChatBox> items = List<ChatBox>.generate(
-        50, (i) => ChatBox(text: 'Item $i', isBot: true, isHuman: false));
     return Scaffold(
       backgroundColor: const Color(0xFF7A9BEE),
       appBar: AppBar(
