@@ -3,11 +3,14 @@ import 'package:vt_hacks_submission/chatbot.dart';
 import 'package:vt_hacks_submission/components/chatbox_comp.dart';
 import 'package:lottie/lottie.dart';
 import 'package:vt_hacks_submission/page/news_article.dart';
+import 'package:vt_hacks_submission/source.dart';
 
 class ChatPage extends StatefulWidget {
   final ChatBot chatBot;
+  final String user;
 
-  ChatPage({Key? key, required this.chatBot}) : super(key: key);
+  ChatPage({Key? key, required this.chatBot, required this.user})
+      : super(key: key);
 
   @override
   State<ChatPage> createState() => _FullNewsPageState();
@@ -21,13 +24,21 @@ class _FullNewsPageState extends State<ChatPage> with TickerProviderStateMixin {
 
   late final AnimationController _animationController;
 
+  late final Animation<Offset> _offsetAnimation = Tween<Offset>(
+    begin: Offset.zero,
+    end: const Offset(1.5, 0.0),
+  ).animate(CurvedAnimation(
+    parent: _animationController,
+    curve: Curves.elasticIn,
+  ));
+
   @override
   void initState() {
-    super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 2000),
     );
+    super.initState();
   }
 
   @override
@@ -53,103 +64,60 @@ class _FullNewsPageState extends State<ChatPage> with TickerProviderStateMixin {
               onChanged: (val) => {_message = val},
             ),
           ),
-          SizedBox(
-            width: 100,
-            child: GestureDetector(
-              onTap: () async {
-                _animationController.forward();
-                if (_message.isEmpty) return;
-                ChatBox currHuman = ChatBox(
-                    isHuman: true,
-                    isBot: false,
-                    text: _message,
-                    data: [],
-                    processed: []);
-                setState(() {
-                  items.add(currHuman);
-                });
-                _textEditingController.clear();
+          GestureDetector(
+            onTap: () async {
+              if (_message.isEmpty) return;
+              _animationController.forward(from: 0.0);
+              ChatBox currHuman = ChatBox(
+                  isHuman: true,
+                  isBot: false,
+                  text: _message,
+                  data: [],
+                  processed: []);
+              setState(() {
+                items.add(currHuman);
+              });
+              _textEditingController.clear();
 
-                var value = await widget.chatBot.query(_message);
+              var value = await widget.chatBot.query(_message);
 
-                setState(() {
-                  var listOfResults = value.results;
-                  List<NewsArticle> listOfArticles = [];
+              var listOfResults = value.results;
+              List<NewsArticle> listOfArticles = [];
 
-                  listOfResults.forEach((element) {
-                    NewsArticle curr = NewsArticle(
-                        title: element.title,
-                        newsSource: element.website,
-                        biasRating: "0",
-                        credibilityRating: "0",
-                        factualReporting: "0");
+              listOfResults.forEach((element) async {
+                Source currSource =
+                    await Source.loadFromDomain(element.website);
+                NewsArticle curr = NewsArticle(
+                    title: element.title,
+                    newsSource: element.website,
+                    biasRating: currSource.bias,
+                    credibilityRating: currSource.credibility,
+                    factualReporting: currSource.factuality,
+                    articleUrl: element.url);
 
-                    listOfArticles.add(curr);
-                  });
-                  ChatBox currRobot = ChatBox(
-                      isHuman: false,
-                      isBot: true,
-                      text: "We've found results, click to have a look!",
-                      data: value.results,
-                      processed: listOfArticles);
-                  items.add(currRobot);
-                  _message = "";
-                  _animationController.reset();
-                });
-              },
-              child: Container(
-                child: Lottie.network(
-                  "https://assets6.lottiefiles.com/packages/lf20_r4alsuls.json",
+                listOfArticles.add(curr);
+              });
+              ChatBox currRobot = ChatBox(
+                  isHuman: false,
+                  isBot: true,
+                  text: "We've found results, click to have a look!",
+                  data: value.results,
+                  processed: listOfArticles);
+
+              setState(() {
+                items.add(currRobot);
+                _message = "";
+              });
+            },
+            child: Container(
+              child: Lottie.network(
+                  "https://assets8.lottiefiles.com/packages/lf20_ktlqec6m.json",
                   controller: _animationController,
-                ),
-              ),
+                  onLoaded: (compo) =>
+                      {_animationController.duration = compo.duration},
+                  width: 200.0),
             ),
-          )
-          // IconButton(
-          //     onPressed: () {
-          //       // do api call to bot
-          // ChatBox currHuman = ChatBox(
-          //     isHuman: true,
-          //     isBot: false,
-          //     text: _message,
-          //     data: [],
-          //     processed: []);
-          // setState(() {
-          //   items.add(currHuman);
-          // });
-          // _textEditingController.clear();
-
-          // widget.chatBot.query(_message).then((value) => {
-          //       setState(() {
-          //         var listOfResults = value.results;
-          //         List<NewsArticle> listOfArticles = [];
-
-          //         listOfResults.forEach((element) {
-          //           NewsArticle curr = NewsArticle(
-          //               title: element.title,
-          //               newsSource: element.website,
-          //               biasRating: "0",
-          //               credibilityRating: "0",
-          //               factualReporting: "0");
-
-          //           listOfArticles.add(curr);
-          //         });
-          //         ChatBox currRobot = ChatBox(
-          //             isHuman: false,
-          //             isBot: true,
-          //             text:
-          //                 "We've found results, click to have a look!",
-          //             data: value.results,
-          //             processed: listOfArticles);
-          //         items.add(currRobot);
-          //         _message = "";
-          //       })
-          //     });
-          //     },
-          //     iconSize: 25.0,
-          //     icon: Icon(Icons
-          //         .send), //Lottie.network(                    "https://lottiefiles.com/52054-sending-confirmation.json"),
-          //     color: Colors.blue)
+          ),
         ],
       ),
     );
@@ -180,14 +148,17 @@ class _FullNewsPageState extends State<ChatPage> with TickerProviderStateMixin {
                 topLeft: Radius.circular(45.0),
                 topRight: Radius.circular(45.0),
               ), // Gets clipped
-              child: ListView.builder(
-                  padding: EdgeInsets.only(top: 45.0),
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    return ChatboxComp(
-                      currChatBox: items[index],
-                    );
-                  }),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width / 2,
+                child: ListView.builder(
+                    padding: EdgeInsets.only(top: 45.0),
+                    itemCount: items.length,
+                    itemBuilder: (context, index) {
+                      return ChatboxComp(
+                        currChatBox: items[index],
+                      );
+                    }),
+              ),
             ),
           ),
         ),

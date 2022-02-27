@@ -104,7 +104,8 @@ class FullNewsPage extends StatelessWidget {
                                           Flexible(
                                             flex: 2,
                                             fit: FlexFit.tight,
-                                            child: Text(i.factualReporting),
+                                            child: Text(
+                                                'FactualRating: ${i.factualReporting}'),
                                           ),
                                           TextButton(
                                             onPressed: () async {

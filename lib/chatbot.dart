@@ -5,7 +5,7 @@ import 'package:vt_hacks_submission/search_query.dart';
 import 'dart:convert';
 
 class ChatBot {
-  static const String AUTH_CREDENTIALS_PATH = "dialog_flow_auth.json";
+  static const String AUTH_CREDENTIALS_PATH = "assets/dialog_flow_auth.json";
   late final DialogFlowtter dialogFlowtterInst;
 
   static Future<ChatBot> load() async {
@@ -29,6 +29,7 @@ class ChatBot {
   }
 
   static Future<DialogFlowtter> _getCredentials(final String path) async {
+    await Future.delayed(const Duration(seconds: 4));
     return await DialogFlowtter.fromFile(path: AUTH_CREDENTIALS_PATH);
   }
 }

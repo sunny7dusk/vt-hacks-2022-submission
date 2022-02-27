@@ -22,11 +22,11 @@ class NewsArticle {
 
   Text getBiasRating() {
     return Text(
-      biasRating,
+      'BiasRating: $biasRating',
       style: TextStyle(
-          color: biasRating == "LEFT"
+          color: biasRating.contains("LEFT")
               ? Colors.green
-              : biasRating == "RIGHT"
+              : biasRating.contains("RIGHT")
                   ? Colors.red
                   : Colors.grey),
     );
@@ -34,7 +34,7 @@ class NewsArticle {
 
   Text getCredibilityRating() {
     return Text(
-      credibilityRating,
+      'CredibilityRating: $credibilityRating',
       style: TextStyle(
           color: credibilityRating == "LOW CREDIBILITY"
               ? Colors.red

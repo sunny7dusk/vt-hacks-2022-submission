@@ -11,6 +11,8 @@ class SearchQuery {
   factory SearchQuery.fromJson(Map<String, dynamic> map) {
     List<dynamic> items = map["items"];
 
+    // print(map);
+
     return SearchQuery(
         query: map["queries"]["request"][0]["searchTerms"],
         searchTime:
