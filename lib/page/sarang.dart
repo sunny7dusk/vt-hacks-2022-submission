@@ -14,9 +14,16 @@ class ChatPage extends StatefulWidget {
 }
 
 class _FullNewsPageState extends State<ChatPage> {
+  final _textEditingController = TextEditingController();
   String _message = "";
   int index = 0;
   List<ChatBox> items = [];
+
+  @override
+  void dispose() {
+    super.dispose();
+    _textEditingController.dispose();
+  }
 
   _EntryBox() {
     return Container(
@@ -27,6 +34,7 @@ class _FullNewsPageState extends State<ChatPage> {
           children: <Widget>[
             Expanded(
                 child: TextField(
+              controller: _textEditingController,
               textCapitalization: TextCapitalization.sentences,
               decoration: const InputDecoration.collapsed(
                   hintText: "Ask a question about current news ..."),
@@ -35,17 +43,40 @@ class _FullNewsPageState extends State<ChatPage> {
             IconButton(
                 onPressed: () {
                   // do api call to bot
-                  bool botOrHuman = index % 2 == 0;
-                  ChatBox curr = ChatBox(
-                      isHuman: botOrHuman, isBot: !botOrHuman, text: _message);
-                  // if (!botOrHuman) {
-                  //   widget.chatBot.query(_message).then((value) => null);
-                  // } else {
+                  ChatBox currHuman = ChatBox(
+                      isHuman: true,
+                      isBot: false,
+                      text: _message,
+                      data: [],
+                      processed: []);
+                  items.add(currHuman);
+                  _textEditingController.clear();
+                  _message = "";
 
-                  // }
-                  setState(() {
-                    items.add(curr);
-                  });
+                  widget.chatBot.query(_message).then((value) => {
+                        setState(() {
+                          var listOfResults = value.results;
+                          List<NewsArticle> listOfArticles = [];
+
+                          listOfResults.forEach((element) {
+                            NewsArticle curr = NewsArticle(
+                                title: element.title,
+                                newsSource: element.website,
+                                biasRating: "0",
+                                credibilityRating: "0",
+                                factualReporting: "0");
+
+                            listOfArticles.add(curr);
+                          });
+                          ChatBox currRobot = ChatBox(
+                              isHuman: true,
+                              isBot: false,
+                              text: _message,
+                              data: value.results,
+                              processed: listOfArticles);
+                          items.add(currRobot);
+                        })
+                      });
                 },
                 iconSize: 25.0,
                 icon: Icon(Icons

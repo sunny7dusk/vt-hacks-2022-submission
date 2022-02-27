@@ -1,6 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:vt_hacks_submission/page/full_news_page.dart';
+import 'package:vt_hacks_submission/page/news_article.dart';
+import 'package:vt_hacks_submission/search_result.dart';
 
 class ChatboxComp extends StatelessWidget {
   ChatBox currChatBox;
@@ -9,16 +12,16 @@ class ChatboxComp extends StatelessWidget {
 
   Color colorGenerator() {
     List<Color> ourColors = [
-      Color(0xffdd5e89),
-      Color(0xfff7bb97),
-      Color(0xff43cea2),
-      Color(0xff185a9d),
-      Color(0xffba5370),
-      Color(0xffb06ab3),
-      Color(0xff4568dc),
-      Color(0xff3a1c71),
-      Color(0xffd76d77),
-      Color(0xffffaf7b)
+      const Color(0xffdd5e89),
+      const Color(0xfff7bb97),
+      const Color(0xff43cea2),
+      const Color(0xff185a9d),
+      const Color(0xffba5370),
+      const Color(0xffb06ab3),
+      const Color(0xff4568dc),
+      const Color(0xff3a1c71),
+      const Color(0xffd76d77),
+      const Color(0xffffaf7b)
     ];
     return ourColors[Random().nextInt(ourColors.length)];
   }
@@ -37,18 +40,18 @@ class ChatboxComp extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
-                    stops: [
+                    stops: const [
                       0.1,
                       0.9,
                     ],
                     colors: [colorGenerator(), colorGenerator()],
                   ),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(15.0),
                     bottomLeft: Radius.circular(15.0),
                   ),
                 )
-              : BoxDecoration(
+              : const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
@@ -68,10 +71,17 @@ class ChatboxComp extends StatelessWidget {
               Text(currChatBox.text),
               if (currChatBox.isBot)
                 IconButton(
-                    onPressed: () {
-                      // Navigator.push()
-                    },
-                    icon: Icon(Icons.arrow_forward_ios_rounded))
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            FullNewsPage(newsArticles: currChatBox.processed),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.arrow_forward_ios_rounded),
+                ),
             ],
           ),
         ),
@@ -84,9 +94,12 @@ class ChatBox {
   String text;
   bool isHuman;
   bool isBot;
-  ChatBox({
-    this.text = "",
-    required this.isHuman,
-    required this.isBot,
-  });
+  List<SearchResult> data;
+  List<NewsArticle> processed;
+  ChatBox(
+      {this.text = "",
+      required this.isHuman,
+      required this.isBot,
+      required this.data,
+      required this.processed});
 }
