@@ -131,7 +131,6 @@ class FullNewsPage extends StatelessWidget {
               height: MediaQuery.of(context).size.height - 60,
               width: MediaQuery.of(context).size.width,
             ),
-            ElevatedButton(onPressed: () {}, child: Text('Hello word'))
           ],
         ),
       ),

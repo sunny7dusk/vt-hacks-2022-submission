@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:vt_hacks_submission/components/chatbox_comp.dart';
+import 'package:vt_hacks_submission/page/full_news_page.dart';
 import 'package:vt_hacks_submission/page/sarang.dart';
 import 'package:vt_hacks_submission/page/loading_animation_page.dart';
 import 'package:vt_hacks_submission/page/news_article.dart';
@@ -55,21 +56,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Future<String>.delayed(const Duration(seconds: 2), () => 'Weee');
   }
 
+  // FullNewsPage(newsArticles: newsArticle)
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-
       future: _loadingData(),
       builder: (BuildContext ctx, AsyncSnapshot snap) {
         if (snap.data == null) {
           return const LoadingAnimationsPage();
         } else {
-          return FullNewsPage(
-            newsArticles: newsArticle,
-          );
+          return const ChatPage();
         }
       },
     );
   }
 }
-

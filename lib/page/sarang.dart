@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:vt_hacks_submission/components/chatbox_comp.dart';
 import 'package:lottie/lottie.dart';
 
-class FullNewsPage extends StatefulWidget {
-  const FullNewsPage({Key? key}) : super(key: key);
+class ChatPage extends StatefulWidget {
+  const ChatPage({Key? key}) : super(key: key);
 
   @override
-  State<FullNewsPage> createState() => _FullNewsPageState();
+  State<ChatPage> createState() => _FullNewsPageState();
 }
 
-class _FullNewsPageState extends State<FullNewsPage> {
+class _FullNewsPageState extends State<ChatPage> {
   String _message = "";
 
   _EntryBox() {
@@ -24,10 +24,11 @@ class _FullNewsPageState extends State<FullNewsPage> {
               textCapitalization: TextCapitalization.sentences,
               decoration:
                   InputDecoration.collapsed(hintText: "Ask a question ..."),
+              onChanged: (val) => {_message = val},
             )),
             IconButton(
-                onPressed: (value) {
-                  _message = value;
+                onPressed: () {
+                  // do api call to bot
                 },
                 iconSize: 25.0,
                 icon: Icon(Icons
