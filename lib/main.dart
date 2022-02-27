@@ -12,7 +12,6 @@ import 'package:vt_hacks_submission/page/news_article.dart';
 late final ChatBot globalBot;
 
 void main() async {
-  globalBot = await ChatBot.load();
   runApp(const MyApp());
 }
 
@@ -57,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   );
 
   _loadingData() {
-    return Future<String>.delayed(const Duration(seconds: 2), () => 'Weee');
+    return ChatBot.load();
   }
 
   // FullNewsPage(newsArticles: newsArticle)
@@ -69,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (snap.data == null) {
           return const LoadingAnimationsPage();
         } else {
+          globalBot = snap.data;
           return ChatPage(chatBot: globalBot);
         }
       },

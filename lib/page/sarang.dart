@@ -49,9 +49,10 @@ class _FullNewsPageState extends State<ChatPage> {
                       text: _message,
                       data: [],
                       processed: []);
-                  items.add(currHuman);
+                  setState(() {
+                    items.add(currHuman);
+                  });
                   _textEditingController.clear();
-                  _message = "";
 
                   widget.chatBot.query(_message).then((value) => {
                         setState(() {
@@ -69,12 +70,14 @@ class _FullNewsPageState extends State<ChatPage> {
                             listOfArticles.add(curr);
                           });
                           ChatBox currRobot = ChatBox(
-                              isHuman: true,
-                              isBot: false,
-                              text: _message,
+                              isHuman: false,
+                              isBot: true,
+                              text:
+                                  "We've found results, click to have a look!",
                               data: value.results,
                               processed: listOfArticles);
                           items.add(currRobot);
+                          _message = "";
                         })
                       });
                 },
