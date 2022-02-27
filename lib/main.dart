@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
 import 'package:lottie/lottie.dart';
 import 'package:vt_hacks_submission/components/chatbox_comp.dart';
-import 'package:vt_hacks_submission/page/full_news_page.dart';
+import 'package:vt_hacks_submission/page/sarang.dart';
 import 'package:vt_hacks_submission/page/loading_animation_page.dart';
+import 'package:vt_hacks_submission/page/news_article.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'OpenSans',
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -35,6 +38,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<NewsArticle> newsArticle = List.generate(
+    50,
+    (index) => NewsArticle(
+        newsSource: "CNN",
+        title:
+            "Ukraine's outgunned forces slow Russian invasion in number of cities",
+        biasRating: "LEFT",
+        credibilityRating: "MEDIUM CREDIBILITY",
+        factualReporting: "MIXED",
+        description:
+            "View the latest news and breaking news today for U.S., world, weather, entertainment, politics and health at CNN.com."),
+  );
+
   _loadingData() {
     return Future<String>.delayed(const Duration(seconds: 2), () => 'Weee');
   }
@@ -42,90 +58,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _loadingData(),
-        builder: (BuildContext ctx, AsyncSnapshot snap) {
-          if (snap.data == null) {
-            return const LoadingAnimationsPage();
-          } else {
-            return Scaffold(
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ChatboxComp(
-                      currChatBox: ChatBox(
-                          isBot: true, isHuman: false, text: "Hwllo\nvt\nsmth"),
-                    ),
-                    ChatboxComp(
-                      currChatBox: ChatBox(
-                          isBot: false,
-                          isHuman: true,
-                          text:
-                              "Hwllovtwejfuigwegewggegqfitqyfyuief6ewfufuwef6ewtefeeeee"),
-                    ),
-                    ChatboxComp(
-                      currChatBox: ChatBox(
-                          isBot: true, isHuman: false, text: "Hwllo\nvt\nsmth"),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }
-        });
+      future: _loadingData(),
+      builder: (BuildContext ctx, AsyncSnapshot snap) {
+        if (snap.data == null) {
+          return const LoadingAnimationsPage();
+        } else {
+          return FullNewsPage(
+            newsArticles: newsArticle,
+          );
+        }
+      },
+    );
   }
 }
 
-// Scaffold(
-//               backgroundColor: const Color(0xFF7A9BEE),
-//               appBar: AppBar(
-//                 title: const Text('info.friend'),
-//                 centerTitle: true,
-//                 backgroundColor: Colors.transparent,
-//                 elevation: 0.0,
-//               ),
-//               body: Center(
-//                 child: Column(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: <Widget>[
-//                     Stack(
-//                       children: [
-//                         Container(
-//                           height: MediaQuery.of(ctx).size.height - 70.0,
-//                           width: MediaQuery.of(ctx).size.width,
-//                           color: Colors.transparent,
-//                         ),
-//                         Positioned(
-//                           top: 20.0,
-//                           child: Container(
-//                             decoration: const BoxDecoration(
-//                               borderRadius: BorderRadius.only(
-//                                 topLeft: Radius.circular(45.0),
-//                                 topRight: Radius.circular(45.0),
-//                               ),
-//                               color: Colors.white,
-//                             ),
-//                           ),
-//                           height: MediaQuery.of(ctx).size.height,
-//                           width: MediaQuery.of(ctx).size.width,
-//                         ),
-//                         Column(
-//                           children: [
-//                             Scrollbar(
-//                               child: SingleChildScrollView(
-//                                 child: Column(
-//                                   children: [
-//                                     for (var i = 0; i < 100; i++)
-//                                       Expanded(child: Text(i.toString()))
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             );
