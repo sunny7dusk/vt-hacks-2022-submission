@@ -1,10 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:lottie/lottie.dart';
 import 'package:vt_hacks_submission/chatbot.dart';
-import 'package:vt_hacks_submission/components/chatbox_comp.dart';
-import 'package:vt_hacks_submission/page/full_news_page.dart';
 import 'package:vt_hacks_submission/page/sarang.dart';
 import 'package:vt_hacks_submission/page/loading_animation_page.dart';
 import 'package:vt_hacks_submission/firebase_options.dart';
@@ -45,19 +41,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<NewsArticle> newsArticle = List.generate(
-    50,
-    (index) => NewsArticle(
-        newsSource: "CNN",
-        title:
-            "Ukraine's outgunned forces slow Russian invasion in number of cities",
-        biasRating: "LEFT",
-        credibilityRating: "MEDIUM CREDIBILITY",
-        factualReporting: "MIXED",
-        description:
-            "View the latest news and breaking news today for U.S., world, weather, entertainment, politics and health at CNN.com."),
-  );
-
   _loadingData() {
     return ChatBot.load();
   }
@@ -71,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (snap.data == null) {
           return const LoadingAnimationsPage();
         } else {
-          globalBot = snap.data;
+          ChatBot globalBot = snap.data;
           return ChatPage(chatBot: globalBot);
         }
       },
