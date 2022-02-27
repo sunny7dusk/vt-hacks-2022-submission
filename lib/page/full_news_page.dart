@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:vt_hacks_submission/components/chatbox_comp.dart';
 
 class FullNewsPage extends StatelessWidget {
   const FullNewsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<ChatBox> items =
+        List<ChatBox>.generate(50, (i) => ChatBox(chatText: 'Item $i'));
+
     return Scaffold(
       backgroundColor: const Color(0xFF7A9BEE),
       appBar: AppBar(
@@ -33,10 +37,12 @@ class FullNewsPage extends StatelessWidget {
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Column(
-                        children: [
-                          for (var i = 0; i < 100; i++) Text(i.toString())
-                        ],
-                      ),
+                          children:
+                              items.map((item) => ChatboxComp(item)).toList()
+//                          for (var i = 0; i < items.length; i++)
+//                            {ChatboxComp(items[i])}
+
+                          ),
                     ),
                   ),
                 ),
@@ -44,6 +50,7 @@ class FullNewsPage extends StatelessWidget {
               height: MediaQuery.of(context).size.height - 60,
               width: MediaQuery.of(context).size.width,
             ),
+            ElevatedButton(onPressed: () {}, child: Text('Hello word'))
           ],
         ),
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:vt_hacks_submission/components/chatbox_comp.dart';
-import 'package:vt_hacks_submission/page/full_news_page.dart';
+import 'package:vt_hacks_submission/page/sarang.dart';
 import 'package:vt_hacks_submission/page/loading_animation_page.dart';
 
 void main() {

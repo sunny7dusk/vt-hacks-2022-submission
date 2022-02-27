@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
 class ChatboxComp extends StatelessWidget {
-  const ChatboxComp({Key? key}) : super(key: key);
+  final ChatBox item;
+//  final EdgeInsets myMargin;
+  final bool myMessage;
+  ChatboxComp(this.item, this.myMessage);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 80.0),
+      margin: this.myMessage
+          ? EdgeInsets.only(top: 8.0, bottom: 8.0, left: 80.0)
+          : EdgeInsets.only(top: 8.0, bottom: 8.0, right: 80.0),
       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
@@ -22,10 +27,12 @@ class ChatboxComp extends StatelessWidget {
             ],
           ),
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15.0),
-            bottomLeft: Radius.circular(15.0),
+            topLeft: myMessage ? Radius.circular(15.0) : Radius.zero,
+            bottomLeft: myMessage ? Radius.circular(15.0) : Radius.zero,
+            topRight: !myMessage ? Radius.circular(15.0) : Radius.zero,
+            bottomRight: !myMessage ? Radius.circular(15.0) : Radius.zero,
           )),
-      child: Text("Hello\n VT\n Hacks"),
+      child: Text(item.chatText),
     );
   }
 }
