@@ -49,7 +49,23 @@ class _MyHomePageState extends State<MyHomePage> {
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[ChatboxComp()],
+                  children: <Widget>[
+                    ChatboxComp(
+                      currChatBox: ChatBox(
+                          isBot: true, isHuman: false, text: "Hwllo\nvt\nsmth"),
+                    ),
+                    ChatboxComp(
+                      currChatBox: ChatBox(
+                          isBot: false,
+                          isHuman: true,
+                          text:
+                              "Hwllovtwejfuigwegewggegqfitqyfyuief6ewfufuwef6ewtefeeeee"),
+                    ),
+                    ChatboxComp(
+                      currChatBox: ChatBox(
+                          isBot: true, isHuman: false, text: "Hwllo\nvt\nsmth"),
+                    ),
+                  ],
                 ),
               ),
             );
