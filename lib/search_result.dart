@@ -3,7 +3,8 @@ class SearchResult {
   late final String website;
   late final String url;
   late final String snippet;
-  late final dynamic? imageUrl;
+  late final String?
+      imageUrl; // Might break.. if it does this should be dynamic type...
 
   SearchResult(
       {required this.title,
@@ -13,13 +14,11 @@ class SearchResult {
       this.imageUrl});
 
   factory SearchResult.fromJson(Map<String, dynamic> map) {
-    dynamic domain = map["displayLink"].split(".");
-
     return SearchResult(
-        title: map["title"],
-        website: domain[domain.length - 2],
-        url: map["link"],
-        snippet: map["snippet"],
-        imageUrl: map["pagemap"]["cse_thumbnail"]?[0]["src"]);
+        title: map['title'],
+        website: map['displayLink'].replaceAll("www.", ""),
+        url: map['link'],
+        snippet: map['snippet'],
+        imageUrl: map['pagemap']['cse_thumbnail']?[0]['src']);
   }
 }

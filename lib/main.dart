@@ -7,11 +7,14 @@ import 'package:vt_hacks_submission/components/chatbox_comp.dart';
 import 'package:vt_hacks_submission/page/full_news_page.dart';
 import 'package:vt_hacks_submission/page/sarang.dart';
 import 'package:vt_hacks_submission/page/loading_animation_page.dart';
-import 'package:vt_hacks_submission/page/news_article.dart';
-
-late final ChatBot globalBot;
+import 'package:vt_hacks_submission/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
