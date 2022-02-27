@@ -3,7 +3,8 @@ class SearchResult {
   late final String website;
   late final String url;
   late final String snippet;
-  late final dynamic? imageUrl;
+  late final String?
+      imageUrl; // Might break.. if it does this should be dynamic type...
 
   SearchResult(
       {required this.title,
