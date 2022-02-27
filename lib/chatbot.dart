@@ -21,7 +21,16 @@ class ChatBot {
     DetectIntentResponse response =
         await dialogFlowtterInst.detectIntent(queryInput: queryInput);
 
-    return parseResponse(jsonDecode(response.text!));
+    // print(response.message);
+
+    final QueryInput searchInput = QueryInput(
+      text: TextInput(text: 'web_search_for:$message'),
+    );
+
+    DetectIntentResponse search =
+        await dialogFlowtterInst.detectIntent(queryInput: searchInput);
+
+    return parseResponse(jsonDecode(search.text!));
   }
 
   Future<SearchQuery> parseResponse(Map<String, dynamic> map) async {

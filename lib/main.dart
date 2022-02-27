@@ -1,19 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:lottie/lottie.dart';
 import 'package:vt_hacks_submission/chatbot.dart';
-import 'package:vt_hacks_submission/components/chatbox_comp.dart';
-import 'package:vt_hacks_submission/page/full_news_page.dart';
 import 'package:vt_hacks_submission/page/sarang.dart';
 import 'package:vt_hacks_submission/page/loading_animation_page.dart';
 import 'package:vt_hacks_submission/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 late final ChatBot globalBot;
-late final String generatedAvatar =
-    'https://avatars.dicebear.com/api/croodles-neutral/${Timestamp.now()}.svg';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
           return const LoadingAnimationsPage();
         } else {
           globalBot = snap.data;
-          return ChatPage(chatBot: globalBot, user: generatedAvatar);
+          return ChatPage(chatBot: globalBot);
         }
       },
     );

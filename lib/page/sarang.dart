@@ -7,10 +7,8 @@ import 'package:vt_hacks_submission/source.dart';
 
 class ChatPage extends StatefulWidget {
   final ChatBot chatBot;
-  final String user;
 
-  ChatPage({Key? key, required this.chatBot, required this.user})
-      : super(key: key);
+  ChatPage({Key? key, required this.chatBot}) : super(key: key);
 
   @override
   State<ChatPage> createState() => _FullNewsPageState();
