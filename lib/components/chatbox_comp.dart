@@ -9,20 +9,20 @@ class ChatboxComp extends StatelessWidget {
   ChatBox currChatBox;
 
   ChatboxComp({Key? key, required this.currChatBox}) : super(key: key);
+  List<Color> ourColors = [
+    const Color(0xffdd5e89),
+    const Color(0xfff7bb97),
+    const Color(0xff43cea2),
+    const Color(0xff185a9d),
+    const Color(0xffba5370),
+    const Color(0xffb06ab3),
+    const Color(0xff4568dc),
+    const Color(0xff3a1c71),
+    const Color(0xffd76d77),
+    const Color(0xffffaf7b)
+  ];
 
   Color colorGenerator() {
-    List<Color> ourColors = [
-      const Color(0xffdd5e89),
-      const Color(0xfff7bb97),
-      const Color(0xff43cea2),
-      const Color(0xff185a9d),
-      const Color(0xffba5370),
-      const Color(0xffb06ab3),
-      const Color(0xff4568dc),
-      const Color(0xff3a1c71),
-      const Color(0xffd76d77),
-      const Color(0xffffaf7b)
-    ];
     return ourColors[Random().nextInt(ourColors.length)];
   }
 
@@ -44,7 +44,7 @@ class ChatboxComp extends StatelessWidget {
                       0.1,
                       0.9,
                     ],
-                    colors: [colorGenerator(), colorGenerator()],
+                    colors: [ourColors[2], ourColors[3]],
                   ),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(15.0),
