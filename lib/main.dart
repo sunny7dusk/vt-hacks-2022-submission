@@ -37,14 +37,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<NewsArticle> newsArticle = List.generate(
-    100,
+    50,
     (index) => NewsArticle(
         newsSource: "CNN",
         title:
             "Ukraine's outgunned forces slow Russian invasion in number of cities",
         biasRating: "LEFT",
         credibilityRating: "MEDIUM CREDIBILITY",
-        factualReporting: "MIXED"),
+        factualReporting: "MIXED",
+        description:
+            "View the latest news and breaking news today for U.S., world, weather, entertainment, politics and health at CNN.com."),
   );
 
   _loadingData() {

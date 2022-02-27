@@ -7,6 +7,8 @@ class NewsArticle {
   String biasRating;
   String credibilityRating;
   String factualReporting;
+  String publishedDate;
+  String description;
 
   NewsArticle(
       {required this.title,
@@ -14,7 +16,9 @@ class NewsArticle {
       this.articleUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       required this.biasRating,
       required this.credibilityRating,
-      required this.factualReporting});
+      required this.factualReporting,
+      this.publishedDate = "",
+      this.description = ""});
 
   Text getBiasRating() {
     return Text(
