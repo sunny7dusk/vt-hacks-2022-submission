@@ -14,7 +14,7 @@ class _FullNewsPageState extends State<ChatPage> {
 
   _EntryBox() {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         color: Colors.white,
         height: 70.0,
         child: Row(
@@ -22,8 +22,8 @@ class _FullNewsPageState extends State<ChatPage> {
             Expanded(
                 child: TextField(
               textCapitalization: TextCapitalization.sentences,
-              decoration:
-                  InputDecoration.collapsed(hintText: "Ask a question ..."),
+              decoration: const InputDecoration.collapsed(
+                  hintText: "Ask a question about current news ..."),
               onChanged: (val) => {_message = val},
             )),
             IconButton(
@@ -40,8 +40,8 @@ class _FullNewsPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<ChatBox> items =
-        List<ChatBox>.generate(50, (i) => ChatBox(chatText: 'Item $i'));
+    List<ChatBox> items = List<ChatBox>.generate(
+        50, (i) => ChatBox(text: 'Item $i', isBot: true, isHuman: false));
     return Scaffold(
       backgroundColor: const Color(0xFF7A9BEE),
       appBar: AppBar(
@@ -53,7 +53,7 @@ class _FullNewsPageState extends State<ChatPage> {
       body: Column(children: <Widget>[
         Expanded(
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(45.0),
@@ -61,7 +61,7 @@ class _FullNewsPageState extends State<ChatPage> {
               ),
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(45.0),
                 topRight: Radius.circular(45.0),
               ), // Gets clipped
@@ -69,7 +69,9 @@ class _FullNewsPageState extends State<ChatPage> {
                   padding: EdgeInsets.only(top: 45.0),
                   itemCount: items.length,
                   itemBuilder: (context, index) {
-                    return ChatboxComp(items[index], false);
+                    return ChatboxComp(
+                      currChatBox: items[index],
+                    );
                   }),
             ),
           ),

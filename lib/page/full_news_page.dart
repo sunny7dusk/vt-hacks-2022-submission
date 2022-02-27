@@ -12,9 +12,6 @@ class FullNewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<ChatBox> items =
-        List<ChatBox>.generate(50, (i) => ChatBox(chatText: 'Item $i'));
-
     return Scaffold(
       backgroundColor: const Color(0xFF7A9BEE),
       appBar: AppBar(
