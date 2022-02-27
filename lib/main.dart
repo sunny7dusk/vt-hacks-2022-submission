@@ -1,4 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import 'package:lottie/lottie.dart';
+import 'package:vt_hacks_submission/chatbot.dart';
+import 'package:vt_hacks_submission/components/chatbox_comp.dart';
+import 'package:vt_hacks_submission/page/full_news_page.dart';
+import 'package:vt_hacks_submission/page/sarang.dart';
 import 'package:vt_hacks_submission/page/loading_animation_page.dart';
 import 'package:vt_hacks_submission/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,6 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'OpenSans',
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -37,27 +45,36 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<NewsArticle> newsArticle = List.generate(
+    50,
+    (index) => NewsArticle(
+        newsSource: "CNN",
+        title:
+            "Ukraine's outgunned forces slow Russian invasion in number of cities",
+        biasRating: "LEFT",
+        credibilityRating: "MEDIUM CREDIBILITY",
+        factualReporting: "MIXED",
+        description:
+            "View the latest news and breaking news today for U.S., world, weather, entertainment, politics and health at CNN.com."),
+  );
+
   _loadingData() {
-    return Future<String>.delayed(const Duration(seconds: 5), () => 'Weee');
+    return ChatBot.load();
   }
 
+  // FullNewsPage(newsArticles: newsArticle)
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _loadingData(),
-        builder: (BuildContext ctx, AsyncSnapshot snap) {
-          if (snap.data == null) {
-            return LoadingAnimationsPage();
-          } else {
-            return Scaffold(
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[],
-                ),
-              ),
-            );
-          }
-        });
+      future: _loadingData(),
+      builder: (BuildContext ctx, AsyncSnapshot snap) {
+        if (snap.data == null) {
+          return const LoadingAnimationsPage();
+        } else {
+          globalBot = snap.data;
+          return ChatPage(chatBot: globalBot);
+        }
+      },
+    );
   }
 }
