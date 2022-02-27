@@ -8,14 +8,9 @@ class ChatBot {
   static const String AUTH_CREDENTIALS_PATH = "dialog_flow_auth.json";
   late final DialogFlowtter dialogFlowtterInst;
 
-  ChatBot._() {
-    _getCredentials(AUTH_CREDENTIALS_PATH).then((value) {
-      dialogFlowtterInst = value;
-    });
-  }
-
-  Future<ChatBot> load() async {
-    return ChatBot._();
+  static Future<ChatBot> load() async {
+    return ChatBot()
+      ..dialogFlowtterInst = await _getCredentials(AUTH_CREDENTIALS_PATH);
   }
 
   Future<SearchQuery> query(final String message) async {
@@ -33,7 +28,7 @@ class ChatBot {
     return SearchQuery.fromJson(map);
   }
 
-  Future<DialogFlowtter> _getCredentials(final String path) async {
+  static Future<DialogFlowtter> _getCredentials(final String path) async {
     return await DialogFlowtter.fromFile(path: AUTH_CREDENTIALS_PATH);
   }
 }

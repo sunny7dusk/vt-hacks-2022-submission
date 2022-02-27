@@ -13,13 +13,11 @@ class SearchResult {
       this.imageUrl});
 
   factory SearchResult.fromJson(Map<String, dynamic> map) {
-    dynamic domain = map["displayLink"].split(".");
-
     return SearchResult(
-        title: map["title"],
-        website: domain[domain.length - 2],
-        url: map["link"],
-        snippet: map["snippet"],
-        imageUrl: map["pagemap"]["cse_thumbnail"]?[0]["src"]);
+        title: map['title'],
+        website: map['displayLink'].replaceAll("www.", ""),
+        url: map['link'],
+        snippet: map['snippet'],
+        imageUrl: map['pagemap']['cse_thumbnail']?[0]['src']);
   }
 }
