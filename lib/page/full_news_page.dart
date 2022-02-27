@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:vt_hacks_submission/page/news_article.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vt_hacks_submission/components/chatbox_comp.dart';
 
 class FullNewsPage extends StatelessWidget {
   FullNewsPage({Key? key, required this.newsArticles}) : super(key: key);
@@ -11,6 +12,9 @@ class FullNewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<ChatBox> items =
+        List<ChatBox>.generate(50, (i) => ChatBox(chatText: 'Item $i'));
+
     return Scaffold(
       backgroundColor: const Color(0xFF7A9BEE),
       appBar: AppBar(
@@ -127,6 +131,7 @@ class FullNewsPage extends StatelessWidget {
               height: MediaQuery.of(context).size.height - 60,
               width: MediaQuery.of(context).size.width,
             ),
+            ElevatedButton(onPressed: () {}, child: Text('Hello word'))
           ],
         ),
       ),
