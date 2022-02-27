@@ -58,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-
       future: _loadingData(),
       builder: (BuildContext ctx, AsyncSnapshot snap) {
         if (snap.data == null) {
