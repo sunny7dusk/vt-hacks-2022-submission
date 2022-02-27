@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
 import 'package:lottie/lottie.dart';
 import 'package:vt_hacks_submission/components/chatbox_comp.dart';
 import 'package:vt_hacks_submission/page/sarang.dart';
@@ -45,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         future: _loadingData(),
         builder: (BuildContext ctx, AsyncSnapshot snap) {
           if (snap.data == null) {
-            return const LoadingAnimationsPage();
+            return LoadingAnimationsPage();
           } else {
             return FullNewsPage();
           }

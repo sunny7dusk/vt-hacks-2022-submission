@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "infofriend-kgcp",
+  "private_key_id": "ad96943b0ca3d279449bce7b8dadab727e547398",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDXK8wglNJUXnoV\nAl5nLu+0hPbwfdCWR2zD9zPiDByzynH9q8g5qVj+VlxjtCr2iRJNOjg2Owk7Dw/J\n2rHI1VYnNNUkUrXg+aDlCb4+IQYLSD+ja4JCT7k1JH5zoOzYjXhXSehRVs2QvLnZ\niitrPgqygKL5Wl73RGHJslEBv3Iw01zCjMslXrCf/99gqT5Zv3ePrzjuCIEFgdf6\nbd/igkzpzfCufoRNQbtOjyl4hXSLmVKuKOg02RSA3kjcmnOkt8d+BF9HnFIgotHc\nx/wr5r7XqngLBrbP9YQYHLl+D879aIkmgYlHbZxJoZbXDh0qdIdWyGfB+975N8Vo\nswNH30YXAgMBAAECggEAHsy5ImzLEqKXbQxywOhaDYf+5PvNcMV2jzKCbbf4H9A5\nsur09TQFdhqcjPUMNU/3m7BavYCD2L1WMDmquym2dFQ+sj1YpYR2AHL9lV0axWCp\nI1ZPRfitdSrtItYFMRZHBI+ivonjUPWC0N3TSz2NQHHjYjgKYfCa4skwiUSDLvO/\nHMkrxlsqyvozSF387p1g3+/rYwfD4KjAswUOHKmWRUf3AYZDkdNm/0iCW2vTR+RQ\nQtpqccQspJjept9O+ZiZ+THSWwZV07WQ5Nuz8xVt80fyIO9XDlOkdPt10um8NHGj\nwdA7dv5+M+YxL523KExZ7tqEJ6QK3G74C8nUF6LeUQKBgQDwQoEvtsDBAeHdetk0\nsuo2+0nxq0wJ7LaaSnCS7zEjig4tcS6h1znQjuJ0Xp/VL38whCLYfVIxBEyZVO94\n9UIP7T3Uc8ZKN+s7dFGpnL8BehQnEtpRx2A/CpISsviMloqgQVfMhYQSAjfBhu+8\nn94GcIpoU8vpKzdVtXUg8zneuQKBgQDlRIUVWIqjcxUTpcHrx+YogIHlWTDpJ3VT\nJJpYqkyiKN0zKpyQkE+qRd5+JIHqd6XglWpeTgmJxBSA2Fz2rS3ZWumKEUy+Mx/C\n4LyY8aGxuJJ8D/TxeQzUYtKXVmMQyQDHpQGkU9Qq1oHYbd3YJklEzY97rIKv9Wl1\nmeu4NfJjTwKBgH7r0w0esRME6Im1BRuGzJ4A/94QDNpNV2WIn5GvlDjfDIBLA0Rx\ny1P2t4CcIDlhnwJFO5c8FPhZ+hEiQmOWxLBfNsON6Zl5kuXUm/NLH8gq8ox1tClx\ndtG2xtXj/9NdD5x7CGO9wLg2vbeZjfoKRiMGvsdART9HGjNH6blfZBnZAoGAL7E2\nQf9+L4wkCUdE9MhLn4dD/jK0kvvLUzVdCi667Ey13wvxL71lZRVNuE3d3KlxDyvl\nyaJQJ6FrZnYbuJDD5eAcjsUUgshdxgs8EFDLgw3TIw2qtYSp35CDIEovJ3G4wM8Z\nbVam3xZqQlxwdqNYQIDGZUK4mOPjQTx4pYRLXM8CgYBNDvkFoJqFS+PTGX2c/fnz\nQb1cY8dyixpvmNkCnFUUkvYEp0AULMmWd3dx6yuF60rAOAURuTUTQ0vF/gdZCAdF\nx1JRdtBhVn1usGn/zaIzgfHJdH5Vsm9t9NuKXsaxkrx1MYwQZg94fw4PrTKrTYFD\nlTBIRNLAiXFsjrBoUx0a8Q==\n-----END PRIVATE KEY-----\n",
+  "client_email": "infofriend@infofriend-kgcp.iam.gserviceaccount.com",
+  "client_id": "116617161846180316704",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/infofriend%40infofriend-kgcp.iam.gserviceaccount.com"
+}
